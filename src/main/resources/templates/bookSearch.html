@@ -1,21 +1,21 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>Book Search</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
    
-     	   <form action="/competition/search" method="post">
+     	   <form action="/book/search" method="post">
     <div id="container"></div>
-    Select Year:
-    <div th:if="${years != null}">
+    Select Category:
+    <div th:if="${categories != null}">
   
 
 
-    <select name="year" >
+    <select name="category" >
   
-    <option th:each="int : ${years}" th:value="${int}" th:text="${int}"></option>
+    <option th:each="category : ${categories}" th:value="${category}" th:text="${category}"></option>
  	 </select>
 
   		 <input type="submit" value="Submit">
@@ -31,7 +31,7 @@
     </ul>
 </div>
 <div th:unless="${links != null}">
-   <div >No competitions exist from selected year.</div>
+   <div >No Books existed with the selected criteria.</div>
 </div>
 </body>
 </html>

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.example.bookStore.dto.UserRegistrationDto;
 import com.example.bookStore.model.Role;
 import com.example.bookStore.model.User;
+import com.example.bookStore.model.Book;
+import com.example.bookStore.repository.BookRepository;
 import com.example.bookStore.repository.UserRepository;
 
 import java.util.Arrays;
@@ -22,6 +24,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private BookRepository bookRepository;
+    
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
@@ -58,6 +63,39 @@ public class UserServiceImpl implements UserService {
            userAdmin.setRoles(Arrays.asList(new Role("ROLE_Admin")));
            
            userRepository.save(userAdmin);
+           
+           Book book = new Book(); 
+           book.setCategory("Science Fiction");
+           book.setTitle("Dune");
+           book.setAuthor("Frank Herbert");
+           book.setPrice(10);
+           
+           Book book2 = new Book(); 
+           book2.setCategory("Science Fiction");
+           book2.setTitle("The Hitchhiker's Guide to the Galaxy");
+           book2.setAuthor("Douglas Adams");
+           book2.setPrice(8);
+           
+           Book book3 = new Book(); 
+           book3.setCategory("Romance");
+           book3.setTitle("Wuthering Heights");
+           book3.setAuthor("Emily Brontë");
+           book3.setPrice(7);
+           
+           Book book4 = new Book(); 
+           book4.setCategory("Romance");
+           book4.setTitle("Anna Karenina");
+           book4.setAuthor("Leo Tolstoy");
+           book4.setPrice(8);
+           
+           bookRepository.save(book);
+           bookRepository.save(book2);
+           bookRepository.save(book3);
+           bookRepository.save(book4);
+     
+           
+    
+           
         }
         User A = userRepository.findByEmail("A@email.com");
         if (A == null){

@@ -1,13 +1,12 @@
 package com.example.bookStore.repository;
 
-import org.hibernate.mapping.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 
-import com.example.bookStore.model.Competition;
+import com.example.bookStore.model.Rating;
+
 @Repository
-public interface CompetitionRepository extends JpaRepository<Competition, Long> {
-	
-	
+public interface RatingRepository extends JpaRepository<Rating, Long> {
+
 }

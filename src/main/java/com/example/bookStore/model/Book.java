@@ -25,6 +25,7 @@ public class Book {
 	private String author;
 	private double price;
 	private String category;
+	private int Stock;
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@LazyCollection(LazyCollectionOption.FALSE)
@@ -39,6 +40,16 @@ public class Book {
 	public Book() {
 		super();
 	}
+
+	
+	public int getStock() {
+		return Stock;
+	}
+
+	public void setStock(int stock) {
+		Stock = stock;
+	}
+
 
 	public Long getId() {
 		return id;

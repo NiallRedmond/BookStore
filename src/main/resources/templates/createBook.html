@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Create Competition</title>
+    <title>Create Book</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
@@ -17,12 +17,12 @@
 
             <div th:if="${param.success}">
                 <div class="alert alert-info">
-                    You've successfully created the competition!
+                    You've successfully added a new book to the stock list!
                 </div>
             </div>
 
-            <h1>Competition creation</h1>
-            <form th:action="@{/createCompetition}" th:object="${tournament}" method="post">
+            <h1>Book creation</h1>
+            <form th:action="@{/createBook}" th:object="${Book}" method="post">
 
                 <p class="error-message"
                    th:if="${#fields.hasGlobalErrors()}"
@@ -30,34 +30,45 @@
                    th:text="${error}">Validation error</p>
 
                 <div class="form-group"
-                     th:classappend="${#fields.hasErrors('name')}? 'has-error':''">
-                    <label for="name" class="control-label">Competiton name</label>
-                    <input id="name"
+                     th:classappend="${#fields.hasErrors('title')}? 'has-error':''">
+                    <label for="author" class="control-label">Title</label>
+                    <input id="title"
                            class="form-control"
-                           th:field="*{name}"/>
+                           th:field="*{title}"/>
                     <p class="error-message"
-                       th:each="error: ${#fields.errors('name')}"
+                       th:each="error: ${#fields.errors('title')}"
                        th:text="${error}">Validation error</p>
                 </div>
                 <div class="form-group"
-                     th:classappend="${#fields.hasErrors('date')}? 'has-error':''">
-                    <label for="date" class="control-label">Date</label>
-                    <input id="date"
-                    	   type="date"
+                     th:classappend="${#fields.hasErrors('author')}? 'has-error':''">
+                    <label for="author" class="control-label">Author</label>
+                    <input id="author"
+                    	
                            class="form-control"
-                           th:field="*{date}"/>
+                           th:field="*{author}"/>
                     <p class="error-message"
-                       th:each="error : ${#fields.errors('date')}"
+                       th:each="error : ${#fields.errors('author')}"
                        th:text="${error}">Validation error</p>
                 </div>
+                
+                	     <select name="category">
+							<option value="Science Fiction">Science Fiction</option>
+							<option value="Romance">Romance</option>
+							<option value="Travel">Travel</option>
+							<option value="Science">Science</option>
+							<option value="History">History</option>
+							<option value="Other">Other</option>
+						</select>
+                
+                
                 <div class="form-group"
-                     th:classappend="${#fields.hasErrors('venue')}? 'has-error':''">
-                    <label for="venue" class="control-label">Venue</label>
-                    <input id="venue"
+                     th:classappend="${#fields.hasErrors('price')}? 'has-error':''">
+                    <label for="price" class="control-label">Price</label>
+                    <input id="price"
                            class="form-control"
-                           th:field="*{venue}"/>
+                           th:field="*{price}"/>
                     <p class="error-message"
-                       th:each="error : ${#fields.errors('venue')}"
+                       th:each="error : ${#fields.errors('price')}"
                        th:text="${error}">Validation error</p>
                 </div>
 

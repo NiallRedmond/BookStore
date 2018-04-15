@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+<title>Book</title>
+</head>
+<body>
+	
+
+		<p th:text="'Title: ' + ${book.title}" />
+		<p th:text="'Author: ' + ${book.author}" />
+		<p th:text="'Category: ' + ${book.category}" />
+		<p th:text="'Price: ' + ${book.price}" />
+	
+
+		<div></div>
+		<div th:if="${role == 'Role_Admin'}">
+			
+
+
+
+
+
+
+	     </div>
+
+</body>
+</html>
+
