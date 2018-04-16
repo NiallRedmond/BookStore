@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 
@@ -23,10 +24,13 @@ import org.thymeleaf.util.StringUtils;
 import com.example.bookStore.dto.BookDTO;
 import com.example.bookStore.dto.Category;
 import com.example.bookStore.model.Book;
+import com.example.bookStore.model.Purchase;
 import com.example.bookStore.model.Role;
 import com.example.bookStore.model.User;
 import com.example.bookStore.repository.BookRepository;
+import com.example.bookStore.repository.PurchaseRepository;
 import com.example.bookStore.repository.UserRepository;
+import com.example.judoku.dto.Year;
 
 @Controller
 public class BookController {
@@ -36,6 +40,9 @@ public class BookController {
 
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	PurchaseRepository purchaseRepository;
 
 	@GetMapping("/createBook")
 	public String createBook(Model model) {
@@ -241,13 +248,7 @@ public class BookController {
 		System.out.println("=======");
 		List<String> ids = new ArrayList<String>(Arrays.asList(user.getCart().split("x")));
 		System.out.println(ids.toString());
-		for(String s : ids)
-		{
-			
-			System.out.println(s);
 
-		}
-		
 		for(String s : ids)
 		{
 			
@@ -266,8 +267,49 @@ public class BookController {
 		}
 		
 
-		
+		map.addAttribute("ids", ids);
 		map.addAttribute("links", links);
+		return "viewCart";
+
+	}
+	
+	@PostMapping("/cart")
+	public String cartPost(ModelMap map, Principal principal) {
+		ArrayList<Book> books = new ArrayList<Book>();
+
+		User user = userRepository.findByEmail(principal.getName());
+		
+		List<String> ids = new ArrayList<String>(Arrays.asList(user.getCart().split("x")));
+		
+		for(String s : ids)
+		{
+			
+			books.add(bookRepository.findOne(Long.parseLong(s)));
+		
+		}
+		
+		for(int i = 0; i < books.size(); i++) 
+		{
+			Collection<Purchase> purchases = books.get(i).getPurchases();
+			Collection<Purchase> uPurchases = user.getPurchases();
+			
+			
+			Purchase purchase = new Purchase();
+			purchase.setAmountPaid(books.get(i).getPrice());
+			purchase.setDate(Calendar.getInstance().getTime().toGMTString());
+			
+			purchases.add(purchase);
+			uPurchases.add(purchase);
+			
+		    books.get(i).setPurchases(purchases);
+		    user.setPurchases(uPurchases);
+		    
+		    purchaseRepository.save(purchase);
+		    userRepository.save(user);
+		    bookRepository.save(books.get(i));
+		}
+		
+		
 		return "viewCart";
 
 	}
