@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{static/css/main.css}" />
+<title>Book</title>
+<style>
+#purchases {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#purchases td, #purchases th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+#purchases tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+#purchases tr:hover {
+	background-color: #ddd;
+}
+
+#purchases th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #4CAF50;
+	color: white;
+}
+</style>
+</head>
+<body>
+
+
+	<p th:text="'Title: ' + ${book.title}" />
+	<p th:text="'Author: ' + ${book.author}" />
+	<p th:text="'Category: ' + ${book.category}" />
+	<p th:text="'Price: ' + ${book.price}" />
+	<p th:text="'Stock: ' + ${book.stock}" />
+
+
+
+			<form th:action="@{/stock}" th:object="${StockDTO}"
+					method="post">
+		New stock amount:<br> <input type="text" name="level"> <br>
+		<br>
+		<br> <input type="hidden" name="id" th:value="${book.id}" />
+		<input type="submit" value="Submit"></form> 
+
+	
+
+
+</body>
+</html>
+

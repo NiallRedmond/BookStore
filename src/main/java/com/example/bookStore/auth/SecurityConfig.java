@@ -26,6 +26,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/createBook/**").hasRole("Admin")
         .and()
         .authorizeRequests()
+        .antMatchers("/admin/**").hasRole("Admin")
+        .and()
+        .authorizeRequests()
             .antMatchers(
                     "/registration",
                     "/js/**",

@@ -13,6 +13,7 @@ public class Purchase {
     private Long id;
     private String date;
     private double amountPaid;
+    private String bookTitle;
     
 	public Purchase(String date, double amountPaid) {
 		super();
@@ -22,6 +23,15 @@ public class Purchase {
 
 	public Purchase() {
 		super();
+	}
+	
+
+	public String getBookTitle() {
+		return bookTitle;
+	}
+
+	public void setBookTitle(String bookTitle) {
+		this.bookTitle = bookTitle;
 	}
 
 	public Long getId() {

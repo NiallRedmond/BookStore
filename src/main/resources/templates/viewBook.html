@@ -4,8 +4,36 @@
 
 <link rel="stylesheet" type="text/css"
 	th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
-<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{static/css/main.css}" />
 <title>Book</title>
+<style>
+#purchases {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#purchases td, #purchases th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+#purchases tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+#purchases tr:hover {
+	background-color: #ddd;
+}
+
+#purchases th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #4CAF50;
+	color: white;
+}
+</style>
 </head>
 <body>
 
@@ -14,22 +42,123 @@
 	<p th:text="'Author: ' + ${book.author}" />
 	<p th:text="'Category: ' + ${book.category}" />
 	<p th:text="'Price: ' + ${book.price}" />
+	<p th:text="'Stock: ' + ${book.stock}" /><div th:if="${role == 'Role_Admin'}">	<span> <a href="/" th:href="@{/stock/} + ${book.id}">Adjust stock </a></span></div>
 
 
 
 	<div>
-		<span> <a href="/"
-			th:href="@{/add/} + ${book.id}">Add to cart
-				</a></span>
+		<span> <a href="/" th:href="@{/add/} + ${book.id}">Add to
+				cart </a></span>
 	</div>
 
 
 
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+
+				<div th:if="${param.success}">
+					<div class="alert alert-info">You've successfully added a new
+						book to the stock list!</div>
+				</div>
+
+				<h3>Review</h3>
+				<form th:action="@{/createRating}" th:object="${RatingDTO}"
+					method="post">
 
 
 
-	<div></div>
-	<div th:if="${role == 'Role_Admin'}"></div>
+					<div class="radio">
+						<label><input type="radio" name="rating" value=1>1
+							Star</label>
+					</div>
+					<div class="radio">
+						<label><input type="radio" name="rating" value=2>2
+							Star</label>
+					</div>
+					<div class="radio disabled">
+						<label><input type="radio" name="rating" value=3>3
+							star</label>
+					</div>
+					<div class="radio disabled">
+						<label><input type="radio" name="rating" value=4>4
+							star</label>
+					</div>
+					<div class="radio disabled">
+						<label><input type="radio" name="rating" value=5>5
+							star</label>
+					</div>
+
+					<div class="form-group">
+						<label for="comment">Comment:</label>
+						<textarea  th:field="*{text}" class="form-control" rows="5" id="comment"></textarea>
+					</div>
+
+
+		
+					<input type="hidden" name="bookId" th:value="${book.id}" />
+
+
+					<div class="form-group">
+						<button type="submit" class="btn btn-success">Create</button>
+
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+	
+	<div>
+	
+			<h4>Reviews::</h4>
+		<table id="purchases">
+			<tr>
+			
+				<th>Star:</th>
+				<th>Review:</th>
+
+			</tr>
+			<tr th:each="rating,itrStat : ${book.ratings}">
+				<td th:text="${rating.rating}"></td>
+				<td th:text="${rating.text}"></td>
+		
+
+			</tr>
+
+
+		</table>
+	
+	
+	
+	
+	
+	</div>
+	<br>
+	
+		<h4>Purchases:</h4>
+		<table id="purchases">
+			<tr>
+				<th>ID:</th>
+				<th>Date:</th>
+				<th>Cost:</th>
+
+			</tr>
+			<tr th:each="purchase,itrStat : ${book.purchases}">
+				<td th:text="${purchase.id}"></td>
+				<td th:text="${purchase.date}"></td>
+				<td th:text="${purchase.amountPaid}"></td>
+
+			</tr>
+
+
+		</table>
+
+
+
+
+	</div>
 
 </body>
 </html>

@@ -26,6 +26,14 @@
 	<input type="hidden" name="ids" th:value="${ids}" />
   		 <input type="submit" value="Purchase">
     </form>
+    
+    	<div th:if="${strings != null}">
+
+		<ul>
+			<li th:each="item : ${strings}" th:utext="${item}"></li>
+		</ul>
+	</div>
+
 	
 	
 </body>

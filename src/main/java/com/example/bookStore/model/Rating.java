@@ -23,6 +23,16 @@ public class Rating {
 		this.rating = rating;
 		this.text = text;
 	}
+	
+	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public double getRating() {
 		return rating;
