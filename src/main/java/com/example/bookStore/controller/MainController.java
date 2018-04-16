@@ -55,10 +55,4 @@ public class MainController {
     }
 
     
-	// Get All Users
-	@GetMapping("/users")
-	public List<User> getAllUsers() {
-		
-		return userRepository.findAll();
-	}
 }
