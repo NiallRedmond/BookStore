@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Cart</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+	
+
+
+
+	<div th:if="${links != null}">
+
+		<ul>
+			<li th:each="item : ${links}" th:utext="${item}"></li>
+		</ul>
+	</div>
+	<div th:unless="${links != null}">
+		<div>Cart empty</div>
+	</div>
+</body>
+<script th:inline="javascript">
+
+
+
+
+</script>
+</html>

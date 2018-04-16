@@ -8,6 +8,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "email"))
@@ -23,6 +24,7 @@ public class User {
 	private String password;
 	private String address;
 	private String payment;
+	private String cart;
 	
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
@@ -47,6 +49,26 @@ public class User {
 	}
 
 	
+
+
+
+
+
+
+	public String getCart() {
+		return cart;
+	}
+
+
+
+
+
+	public void setCart(String cart) {
+		this.cart = cart;
+	}
+
+
+
 	public Collection<Role> getRoles() {
 		return roles;
 	}

@@ -8,24 +8,28 @@
 <title>Book</title>
 </head>
 <body>
-	
 
-		<p th:text="'Title: ' + ${book.title}" />
-		<p th:text="'Author: ' + ${book.author}" />
-		<p th:text="'Category: ' + ${book.category}" />
-		<p th:text="'Price: ' + ${book.price}" />
-	
 
-		<div></div>
-		<div th:if="${role == 'Role_Admin'}">
-			
+	<p th:text="'Title: ' + ${book.title}" />
+	<p th:text="'Author: ' + ${book.author}" />
+	<p th:text="'Category: ' + ${book.category}" />
+	<p th:text="'Price: ' + ${book.price}" />
 
 
 
+	<div>
+		<span> <a href="/"
+			th:href="@{/add/} + ${book.id}">Add to cart
+				</a></span>
+	</div>
 
 
 
-	     </div>
+
+
+
+	<div></div>
+	<div th:if="${role == 'Role_Admin'}"></div>
 
 </body>
 </html>
